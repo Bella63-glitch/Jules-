@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Judels Connections | Business Systems Engineering</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --red:#E60000;
+    --dark:#111;
+    --gray:#f5f5f5;
+    --text:#333;
+}
+
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:'Montserrat',sans-serif;
+    color:var(--text);
+    background:#fff;
+    overflow-x:hidden;
+}
+
+/* NAV */
+nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 5%;
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(10px);
+    border-bottom:3px solid var(--red);
+}
+
+.logo img{height:46px}
+
+.nav-links a{
+    margin-left:20px;
+    font-size:.75rem;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--dark);
+    cursor:pointer;
+    position:relative;
+}
+
+.nav-links a::after{
+    content:'';
+    position:absolute;
+    bottom:-5px;
+    left:0;
+    width:0;
+    height:2px;
+    background:var(--red);
+    transition:.3s;
+}
+.nav-links a:hover::after{width:100%}
+
+/* PAGES */
+.page{display:none}
+.page.active{display:block}
+
+/* HERO */
+.hero{
+    min-height:55vh;
+    padding:60px 20px;
+    background:
+        linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
+        url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80');
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:#fff;
+}
+
+.hero h1{
+    font-size:2.8rem;
+    font-weight:900;
+}
+.hero h1 span{color:var(--red)}
+
+.hero p{
+    max-width:900px;
+    margin:15px auto 0;
+    font-size:1.05rem;
+    line-height:1.7;
+    opacity:.95;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:30px;
+    padding:15px 36px;
+    background:var(--red);
+    color:#fff;
+    font-weight:900;
+    letter-spacing:1px;
+    text-decoration:none;
+    text-transform:uppercase;
+    transition:.3s;
+}
+.btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 30px rgba(230,0,0,.35);
+}
+
+/* SECTIONS */
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    padding:80px 0;
+}
+
+.section-title h2{
+    font-size:2.2rem;
+    font-weight:900;
+    border-left:8px solid var(--red);
+    padding-left:14px;
+    text-transform:uppercase;
+    margin-bottom:30px;
+}
+
+/* VALUE */
+.value-strip{background:var(--gray)}
+.value-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:25px;
+}
+.value-box{
+    background:#fff;
+    padding:28px;
+    border-left:5px solid var(--red);
+    transition:.3s;
+}
+.value-box:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+/* ABOUT */
+.about p{
+    max-width:980px;
+    font-size:1.05rem;
+    line-height:1.9;
+}
+
+/* TECH */
+.tech-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+.tech-card{
+    border:1px solid #e5e5e5;
+    padding:32px;
+    transition:.3s;
+}
+.tech-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 40px rgba(0,0,0,.1);
+}
+.tech-card h3{color:var(--red)}
+
+/* ENGAGEMENT */
+.engagement{
+    background:#111;
+    color:#fff;
+}
+.engagement-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+}
+.engagement-box{
+    background:#1c1c1c;
+    padding:28px;
+    border-bottom:4px solid transparent;
+    transition:.3s;
+}
+.engagement-box:hover{
+    transform:translateY(-6px);
+    border-color:var(--red);
+}
+
+/* SERVICES */
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+.service-card{
+    border:1px solid #e5e5e5;
+    padding:32px;
+}
+.service-card h3{color:var(--red)}
+.service-card p{line-height:1.8}
+
+/* FOOTER */
+footer{
+    background:#000;
+    color:#fff;
+    padding:50px 5%;
+    text-align:center;
+    font-size:.85rem;
+}
+
+/* ANIMATIONS */
+.reveal{
+    opacity:0;
+    transform:translateY(40px);
+    transition:.8s ease;
+}
+.reveal.visible{
+    opacity:1;
+    transform:none;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .hero h1{font-size:2.1rem}
+    .hero{min-height:45vh}
+    .section-title h2{font-size:1.8rem}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">
+        <img src="https://i.postimg.cc/7PVjvFLZ/IMG-20260119-WA0006.jpg" alt="Judels Connections">
+    </div>
+    <div class="nav-links">
+        <a onclick="showPage('home')">Home</a>
+        <a onclick="showPage('services')">Services</a>
+    </div>
+</nav>
+
+<!-- HOME -->
+<section id="home" class="page active">
+
+<div class="hero">
+<div class="reveal">
+    <h1>BUSINESS <span>SYSTEMS</span> ENGINEERING</h1>
+    <p>
+        We design controlled, auditable, and scalable operational systems
+        that replace fragmented processes with structured execution.
+    </p>
+    <a class="btn" href="https://wa.me/254XXXXXXXXX" target="_blank">Connect With Us</a>
+</div>
+</div>
+
+<section class="value-strip">
+<div class="container">
+<div class="value-grid">
+    <div class="value-box reveal">
+        <h3>Operational Discipline</h3>
+        <p>Clear workflows, validated data, and enforced accountability.</p>
+    </div>
+    <div class="value-box reveal">
+        <h3>Management Confidence</h3>
+        <p>Reliable reports leadership can trust.</p>
+    </div>
+    <div class="value-box reveal">
+        <h3>Scalable Control</h3>
+        <p>Systems that grow without breaking governance.</p>
+    </div>
+</div>
+</div>
+</section>
+
+<section class="about">
+<div class="container reveal">
+<div class="section-title"><h2>About Us</h2></div>
+<p>
+Judels Connections is a business systems and ICT advisory firm focused on
+engineering structured operational environments for growing organizations.
+We work across operations, finance, and technology to eliminate manual risk,
+enforce controls, and establish reliable management information systems.
+</p>
+</div>
+</section>
+
+<section>
+<div class="container">
+<div class="section-title reveal"><h2>System Architecture Focus</h2></div>
+<div class="tech-grid">
+    <div class="tech-card reveal">
+        <h3>Data Integrity</h3>
+        <p>Single source of truth with validated transaction logic.</p>
+    </div>
+    <div class="tech-card reveal">
+        <h3>Process Enforcement</h3>
+        <p>Workflows aligned to real operational responsibility.</p>
+    </div>
+    <div class="tech-card reveal">
+        <h3>Governance & Access</h3>
+        <p>Role-based permissions and audit visibility.</p>
+    </div>
+</div>
+</div>
+</section>
+
+<section class="engagement">
+<div class="container">
+<div class="section-title reveal"><h2>How We Engage</h2></div>
+<div class="engagement-grid">
+    <div class="engagement-box reveal">Assessment & Diagnostics</div>
+    <div class="engagement-box reveal">Architecture Design</div>
+    <div class="engagement-box reveal">Controlled Deployment</div>
+    <div class="engagement-box reveal">Stabilization & Support</div>
+</div>
+</div>
+</section>
+
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="page">
+
+<section>
+<div class="container">
+<div class="section-title reveal"><h2>Core Services</h2></div>
+<div class="services-grid">
+    <div class="service-card reveal">
+        <h3>Business Systems Implementation</h3>
+        <p>
+        End-to-end implementation of accounting, inventory, manufacturing,
+        payroll, and operational systems with built-in controls.
+        </p>
+    </div>
+    <div class="service-card reveal">
+        <h3>Process Design & Controls</h3>
+        <p>
+        Workflow engineering, approval hierarchies, segregation of duties,
+        and audit trail enforcement.
+        </p>
+    </div>
+    <div class="service-card reveal">
+        <h3>Compliance & Governance</h3>
+        <p>
+        Payroll alignment, statutory reporting, access governance,
+        and audit readiness.
+        </p>
+    </div>
+</div>
+</div>
+</section>
+
+<section class="engagement">
+<div class="container">
+<div class="section-title reveal"><h2>Service Delivery Model</h2></div>
+<div class="engagement-grid">
+    <div class="engagement-box reveal">
+        <strong>1. Diagnostic & Scoping</strong><br>
+        Operational review, data assessment, risk identification.
+    </div>
+    <div class="engagement-box reveal">
+        <strong>2. Architecture & Design</strong><br>
+        System blueprint, controls, access models.
+    </div>
+    <div class="engagement-box reveal">
+        <strong>3. Configuration & Build</strong><br>
+        Incremental setup, validation, testing.
+    </div>
+    <div class="engagement-box reveal">
+        <strong>4. Deployment & Parallel Run</strong><br>
+        Controlled go-live and reconciliation.
+    </div>
+    <div class="engagement-box reveal">
+        <strong>5. Stabilization & Support</strong><br>
+        Optimization and long-term system reliability.
+    </div>
+</div>
+</div>
+</section>
+
+</section>
+
+<footer>
+&copy; 2026 Judels Connections. Engineered Business Systems.
+</footer>
+
+<script>
+function showPage(id){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0,0);
+    reveal();
+}
+
+const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+        }
+    });
+},{threshold:.15});
+
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+
+</body>
+</html>
